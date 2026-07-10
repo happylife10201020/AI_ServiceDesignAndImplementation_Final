@@ -76,7 +76,6 @@ python server.py                   # 웹 UI로 실행 -> http://localhost:3000
 
 - 답변마다 grade·finalize 등 LLM 호출이 많다. 캐싱/스트리밍으로 개선 가능.
 - 청킹이 문서 단위라 페이지 출처가 파일명까지만 남는다. 페이지 메타데이터·리랭커 도입 여지.
-- CLI만 있다. FastAPI/Streamlit UI로 확장 가능.
 
 ## 출처
 
