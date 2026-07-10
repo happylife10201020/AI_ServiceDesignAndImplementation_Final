@@ -1,4 +1,5 @@
 # AI 서비스 설계 학습 튜터
+![image](./img/img1.jpg)
 
 강의자료를 RAG로 검색해 답하는 멀티턴 튜터 에이전트.
 LangChain / LangGraph 기반. 
