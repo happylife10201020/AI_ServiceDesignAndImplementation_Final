@@ -1,7 +1,9 @@
 # AI 서비스 설계 학습 튜터
 
-강의자료(RAG/LangGraph/Agent PDF)를 RAG로 검색해 답하는 멀티턴 튜터 에이전트.
-LangChain / LangGraph 기반. 최종 평가 과제 "LangChain 기반 Agent 서비스 구현".
+강의자료를 RAG로 검색해 답하는 멀티턴 튜터 에이전트.
+LangChain / LangGraph 기반. 
+
+최종 평가 과제 "LangChain 기반 Agent 서비스 구현".
 
 ## 서비스 소개
 
@@ -68,7 +70,7 @@ python server.py                   # 웹 UI로 실행 -> http://localhost:3000
 | OutputParser | `GradeDocuments`(분기 판단), `StudyAnswer`(최종 답변) |
 | 조건부 분기 | guardrail/agent/grade 3곳 + rewrite 재검색 루프(상한 2회) |
 
-지식원: `knowledge/` 폴더의 PDF(RAG / LangGraph / Agent / 과제 공지). PDF를 추가하면 재인덱싱 시 함께 반영된다.
+지식원: `knowledge/` 폴더의 PDF. PDF를 추가하면 재인덱싱 시 함께 반영된다.
 
 ## 한계 및 개선 방향
 
