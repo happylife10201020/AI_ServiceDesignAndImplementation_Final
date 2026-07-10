@@ -1,4 +1,6 @@
 # AI 서비스 설계 학습 튜터 - 의존성 (Python 3.14 검증)
+fastapi>=0.111
+uvicorn[standard]>=0.30
 langchain-core>=0.3
 langgraph>=1.0
 langgraph-checkpoint-sqlite>=3.1

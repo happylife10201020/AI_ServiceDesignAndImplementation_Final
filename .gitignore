@@ -10,8 +10,9 @@ __pycache__/
 # 산출물 / 벡터DB / 메모리 (재생성 가능)
 output/
 chroma_db/
-chat_memory.db
+chat_memory.db*
 *.sqlite
+chat_histories/
 
 # OS
 .DS_Store
