@@ -1,0 +1,17 @@
+# 비밀키 - 절대 커밋 금지
+.env
+
+# 가상환경 / 캐시
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# 산출물 / 벡터DB / 메모리 (재생성 가능)
+output/
+chroma_db/
+chat_memory.db
+*.sqlite
+
+# OS
+.DS_Store
