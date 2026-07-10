@@ -1,7 +1,8 @@
 """RAG: 강의자료 PDF를 텍스트로 뽑아 청크로 나누고 Chroma에 넣는다.
 
-지식원은 과정에서 받은 강의자료 PDF(day10 RAG, day11 LangGraph, day13 Agent)와
-과제 공지 PDF. 텍스트 추출은 pdf_extractor.extract_raw를 그대로 쓴다.
+지식원은 repo에 포함된 knowledge/ 폴더의 PDF다(RAG, LangGraph, Agent, 과제 공지).
+다른 PC에서 clone해도 바로 인덱싱되도록 문서를 repo 안에 둔다.
+텍스트 추출은 pdf_extractor.extract_raw를 그대로 쓴다.
 """
 
 from __future__ import annotations
@@ -21,13 +22,8 @@ logger = logging.getLogger("rag")
 
 COLLECTION_NAME = "course_docs"
 
-# 인덱싱 대상. 없는 파일은 건너뛴다.
-SOURCE_PDFS = [
-    BASE_DIR.parent / "day10" / "RAG.pdf",
-    BASE_DIR.parent / "day11" / "LangGraph.pdf",
-    BASE_DIR.parent / "day13" / "Agent.pdf",
-    BASE_DIR / "Agent 평가 과제 공지.pdf",
-]
+# 인덱싱 대상 문서 폴더 (repo에 포함). 여기에 PDF를 넣으면 인덱싱된다.
+DOCS_DIR = BASE_DIR / "knowledge"
 
 CHUNK_SIZE = 1000
 CHUNK_OVERLAP = 150
@@ -35,11 +31,7 @@ CHUNK_OVERLAP = 150
 
 def _load_documents() -> list[Document]:
     docs: list[Document] = []
-    for pdf_path in SOURCE_PDFS:
-        if not pdf_path.exists():
-            logger.warning("강의자료 없음, 건너뜀: %s", pdf_path)
-            continue
-
+    for pdf_path in sorted(DOCS_DIR.glob("*.pdf")):
         raw = extract_raw(pdf_path)
         if not raw or not raw.strip():
             logger.warning("텍스트 없음, 건너뜀: %s", pdf_path.name)
@@ -73,7 +65,7 @@ def build_vectorstore(settings: Settings, *, rebuild: bool = False) -> Chroma:
 
     documents = _load_documents()
     if not documents:
-        raise RuntimeError("인덱싱할 강의자료를 찾지 못했다. SOURCE_PDFS 경로를 확인해라.")
+        raise RuntimeError(f"인덱싱할 PDF가 없다. {DOCS_DIR}에 PDF를 넣어라.")
 
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=CHUNK_SIZE,
